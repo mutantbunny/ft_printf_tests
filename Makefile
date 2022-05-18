@@ -4,7 +4,7 @@ CFLAGS_TEST = -ggdb -Wall -Wextra -Werror \
          -I /home/coder/criterion-2.4.0/include \
          -L /home/coder/criterion-2.4.0/lib -lcriterion
 
-SRC_FILES = ../ft_printf.c ../gen_parsers.c ../int_parsers.c ../utils.c utils_test.c int_parsers_test.c gen_parsers_test.c
+SRC_FILES = ../ft_printf.c ../gen_parsers.c ../int_parsers.c ../utils.c utils_test.c int_parsers_test.c gen_parsers_test.c ft_printf_test.c test_utils.c
 BONUS_SRC_FILES =
 DEBUG_SRC_FILE = debug.c
 

@@ -6,16 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 20:24:39 by gmachado          #+#    #+#             */
-/*   Updated: 2022/05/17 20:52:43 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/05/18 01:24:28 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-
-static void redirect_all_stdout(void)
-{
-	cr_redirect_stdout();
-}
 
 Test(get_hex_digit, zero_upper)
 {

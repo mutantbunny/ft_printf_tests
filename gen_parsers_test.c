@@ -6,27 +6,11 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 21:02:07 by gmachado          #+#    #+#             */
-/*   Updated: 2022/05/18 00:47:10 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/05/18 01:23:11 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
-
-static void	redirect_all_stdout(void)
-{
-	cr_redirect_stdout();
-}
-
-static int call_one_arg(int (*f)(va_list vl), ...)
-{
-	va_list	args;
-	int		result;
-
-	va_start(args, f);
-	result = f(args);
-	va_end(args);
-	return (result);
-}
 
 Test(parse_char, printable, .init = redirect_all_stdout)
 {
