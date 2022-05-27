@@ -6,7 +6,7 @@
 /*   By: gmachado <gmachado@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/18 01:18:23 by gmachado          #+#    #+#             */
-/*   Updated: 2022/05/18 02:03:32 by gmachado         ###   ########.fr       */
+/*   Updated: 2022/05/18 20:57:25 by gmachado         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,4 +110,163 @@ Test(parse_code, parse_invalid, .init = redirect_all_stdout)
 	int copied = call_two_args_str(parse_code, format);
 	cr_assert_stdout_eq_str(expected);
 	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, no_format_len_1, .init = redirect_all_stdout)
+{
+	char *str = "a";
+	char *expected = "a";
+
+	int copied = ft_printf(str);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, no_format_len_44, .init = redirect_all_stdout)
+{
+	char *str = "The quick brown fox jumps over the lazy dog.";
+	char *expected = "The quick brown fox jumps over the lazy dog.";
+
+	int copied = ft_printf(str);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, empty_string, .init = redirect_all_stdout)
+{
+	char *str = "";
+	char *expected = "";
+
+	int copied = ft_printf(str);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_c_only, .init = redirect_all_stdout)
+{
+	char *str = "%c";
+	char *expected = "a";
+
+	int copied = ft_printf(str, 'a');
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_s_only, .init = redirect_all_stdout)
+{
+	char *str = "%s";
+	char *expected = "abc\ndef\tg\n";
+
+	int copied = ft_printf(str, "abc\ndef\tg\n");
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_null_s_only, .init = redirect_all_stdout)
+{
+	char *str = "%s";
+	char *expected = "(null)";
+
+	int copied = ft_printf(str, NULL);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_p_only, .init = redirect_all_stdout)
+{
+	char *str = "%p";
+	void *ptr = (void *)0xFF;
+	char *expected = "0xff";
+
+	int copied = ft_printf(str, ptr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_null_p_only, .init = redirect_all_stdout)
+{
+	char *str = "%p";
+	void *ptr = NULL;
+	char *expected = "(nil)";
+
+	int copied = ft_printf(str, ptr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_d_only, .init = redirect_all_stdout)
+{
+	char *str = "%d";
+	int nbr = -2147483648;
+	char *expected = "-2147483648";
+
+	int copied = ft_printf(str, nbr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_i_only, .init = redirect_all_stdout)
+{
+	char *str = "%i";
+	int nbr = -2147483648;
+	char *expected = "-2147483648";
+
+	int copied = ft_printf(str, nbr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_u_only, .init = redirect_all_stdout)
+{
+	char *str = "%u";
+	int nbr = 4294967295;
+	char *expected = "4294967295";
+
+	int copied = ft_printf(str, nbr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_x_only, .init = redirect_all_stdout)
+{
+	char *str = "%x";
+	int nbr = 0xFFFFFFFF;
+	char *expected = "ffffffff";
+
+	int copied = ft_printf(str, nbr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_X_only, .init = redirect_all_stdout)
+{
+	char *str = "%X";
+	int nbr = 0xFFFFFFFF;
+	char *expected = "FFFFFFFF";
+
+	int copied = ft_printf(str, nbr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_percent_only, .init = redirect_all_stdout)
+{
+	char *str = "%%";
+	int nbr = 0xFFFFFFFF;
+	char *expected = "%";
+
+	int copied = ft_printf(str, nbr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, ft_strlen(expected)));
+}
+
+Test(ft_printf, format_percent_unbalanced, .init = redirect_all_stdout)
+{
+	char *str = "%";
+	int nbr = 0xFFFFFFFF;
+	char *expected = "";
+
+	int copied = ft_printf(str, nbr);
+	cr_assert_stdout_eq_str(expected);
+	cr_assert(eq(int, copied, -1));
 }
